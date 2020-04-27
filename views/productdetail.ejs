@@ -1,0 +1,228 @@
+<% include partials/header %>
+
+<!-- product category -->
+<section id="aa-product-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-product-details-area">
+          <div class="aa-product-details-content">
+            <div class="row">
+              <!-- Modal view slider -->
+              <form class="wholeform" action="/order/<%=respectiveproduct._id%>/submit" method="post">
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="aa-product-view-slider">
+                  <div id="demo-1" class="simpleLens-gallery-container">
+                    <!-- products -->
+
+
+
+                    <div class="simpleLens-container">
+                      <div class="simpleLens-big-image-container"><a data-lens-image="<%=respectiveproduct.image%>" class="simpleLens-lens-image"><img src="<%=respectiveproduct.image%>" class="simpleLens-big-image"></a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal view content -->
+              <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="aa-product-view-content">
+                  <h3><%=respectiveproduct.title%></h3>
+                  <div class="aa-price-block">
+                    <span class="aa-product-view-price">Rs.<span  id="input1" name="price" value="<%=respectiveproduct.price%>"><%=respectiveproduct.price%></span> <span style="color:#ff6666;">/Days</span></span>
+                    <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
+                  </div>
+
+
+                  <div style ="color:orange;"class="aa-prod-quantity">
+                    <label for="size">Size:</label>
+                    <select   name="size">
+                      <option selected="S" value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+
+                    </select>
+                  </div>
+
+                  <div style ="color:green;"class="aa-prod-quantity">
+                    <label for="days">Days:</label>
+                      <select  id="input2"class="size" name="day">
+                        <option selected="1" value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+
+                      </select>
+                  </div>
+
+                  <!-- ///////////////////////////////////////// -->
+                  <!-- Shipping Address -->
+                  <div id="shipping"class="panel panel-default aa-checkout-billaddress">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                          <button type="button" class="btn btn-success"name="button">Proceed to buy</button>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                      <div class="panel-body">
+                       <div class="row">
+                          <div class="col-md-6">
+                            <h4 class="panel-title">SHIPPING ADDRESS</h4><hr>
+                            <div class="aa-checkout-single-bill">
+                              <input type="text" name="firstname"placeholder="First Name*" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="aa-checkout-single-bill">
+                              <input type="text" name="lastname" placeholder="Last Name*" required>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="aa-checkout-single-bill">
+                              <input type="email" name="email"placeholder="Email Address*" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="aa-checkout-single-bill">
+                              <input type="tel" name="phoneno"placeholder="Phone*" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="aa-checkout-single-bill">
+                              <textarea cols="8" rows="3" name="address"required placeholder="Address*""></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      <hr>
+                        <h4>Payment Method</h4>
+                        <div class="aa-payment-method">
+                          <label for="cashdelivery"><input type="radio" id="cashdelivery" name="optionRadio" value="1"> Cash on Delivery </label><br>
+                          <!-- <label for="paypal"><input type="radio" id="paypal" name="optionRadio" checked value="0"> Via Paypal </label><br>
+                          <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" border="0" alt="PayPal Acceptance Mark"> -->
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseone">
+                          <input type="submit" value="CONFIRM" id="buttonclick"class="aa-browse-btn">
+                            </a>
+                        </div>
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+
+                            <!-- /////////table//////// -->
+                            <div id="collapseone" class="panel-collapse collapse">
+                              <h4>Order Summary</h4>
+                              <div class="aa-order-summary-area">
+                                <table class="table table-responsive">
+                                  <thead>
+                                    <tr>
+                                      <th>Product</th>
+                                      <th>Total</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td><%=respectiveproduct.title%> X <span id="lolo"></span></td>
+                                      <td >RS.<span id="output"></span></td>
+                                    </tr>
+                                  </tbody>
+
+                                </table>
+                              </div>
+
+                                <button id="wholeformbutton"class="aa-browse-btn" >PLACE ORDER</button>
+
+
+                            </div>
+
+                            <!-- ////////////////table//// -->
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ////////////////////////////////////// -->
+
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="aa-product-details-bottom">
+            <ul class="nav nav-tabs" id="myTab2">
+              <li><a href="#description" data-toggle="tab">Description</a>
+              </li>
+              <li><a href="#review" data-toggle="tab">Reviews</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="description">
+                <p><%=respectiveproduct.disc%></p></div>
+              <div class="tab-pane fade " id="review">
+               <div class="aa-product-review-area">
+                 <h4> Reviews for <%=respectiveproduct.title%></h4>
+                 <ul class="aa-review-nav">
+                   <%for (var i = 0; i < respectiveproduct.comment.length; i++) {%>
+
+                   <li>
+                      <div class="media">
+                        <div class="media-left">
+                          <div class="aa-product-rating">
+                            <span class="btn btn-warning"><%=respectiveproduct.comment[i].rating%></span>
+
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading"><strong><%=respectiveproduct.comment[i].author.commentusername%></strong>  </h4>
+
+                          <p><%=respectiveproduct.comment[i].comment%>
+                            <%if (currentuser && currentuser.isadmin) {%>
+                          <form class="deleteform" action="/product/<%=respectiveproduct._id%>/comment/<%=respectiveproduct.comment[i]._id%>/delete?_method=delete" method="post">
+                            <button type="button" class="deleteformbutton btn btn-info">Delete</button>
+                          </form>
+                          <%}%>
+
+                        </div>
+                      </div>
+                    </li>
+                    <%}%>
+                 </ul>
+                <% if (currentuser) {%>
+                 <h4>Add a review</h4>
+                 <!-- review form -->
+                 <form action="/product/<%=respectiveproduct._id%>/comment" class="reviewform aa-review-form" method="post">
+                    <div class="form-group">
+                      <div class="aa-your-rating">
+                        <p>Your Rating</p><input type="text" name="rating" placeholder="Out of 5">
+                      </div>
+                      <label for="message">Your Review</label>
+                      <textarea class="form-control" rows="3" id="message" name="comment"></textarea>
+                    </div>
+                    <button type="submit" class="reviewformbutton btn btn-default aa-review-submit">Submit</button>
+                 </form>
+                 <% }else{%>
+                   <a href="/login">
+                    <button type="button" class="btn btn-info">Login to Add review</button>
+                    </a>
+               <%  }%>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / product category -->
+
+
+
+
+<% include partials/footer %>

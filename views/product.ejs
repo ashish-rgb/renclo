@@ -1,0 +1,78 @@
+<% include partials/header %>
+  <!-- product category -->
+  <section id="aa-product-category">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+          <div class="aa-product-catg-content">
+            <div class="aa-product-catg-head">
+
+              <div class="aa-product-catg-head-right">
+                <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
+                <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
+              </div>
+            </div>
+
+
+            <div class=" aa-product-catg-body">
+              <ul class="aa-product-catg ">
+                <!-- start single product item -->
+
+
+  <%  for (var i = 0; i < retrivedproduct.length; i++) {%>
+                <!-- start single product item -->
+                <li>
+                  <figure>
+                    <a class="aa-product-img" href="/product/<%=retrivedproduct[i]._id%>"><img src="<%=retrivedproduct[i].image%>" alt="polo shirt img"></a>
+                    <a class="aa-add-card-btn"href="/product/<%=retrivedproduct[i]._id%>"><span class="fa fa-shopping-cart"></span>Buy Now</a>
+
+
+
+                    <figcaption>
+                      <h4 class="aa-product-title"><a href="#"><span class="btn btn-success "><%=retrivedproduct[i].rating%></span>&nbsp&nbsp<%=retrivedproduct[i].title%></a></h4>
+                      <span class="aa-product-price"> <%=retrivedproduct[i].price%></span>
+                       <p class="aa-product-descrip"><%=retrivedproduct[i].disc%></p>
+
+                    </figcaption>
+                  </figure>
+                  <!-- product badge -->
+                <%  if(currentuser && currentuser.isadmin){%>
+                <form  style="display:inline;" action="/delete/<%=retrivedproduct[i]._id%>?_method=delete" method="post">
+                  <button class="btn btn-warning">Delete</button>
+                </form>
+
+                    <a class="btn btn-warning"href="/product/<%=retrivedproduct[i]._id%>/edit">Edit</a>
+                <%  }%>
+                   <span class="aa-badge aa-hot" href="#"><%=retrivedproduct[i].tag%></span>
+                   <hr>
+
+
+                </li>
+                <!-- start single product item -->
+                  <%  }%>
+
+        </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+          <aside class="aa-sidebar">
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Category</h3>
+              <ul class="aa-catg-nav">
+                <li><a href="/category/men">Men</a></li>
+                <li><a href="/category/women">Women</a></li>
+                <li><a href="/category/kids">Kids</a></li>
+              </ul>
+            </div>
+
+
+
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- / product category -->
+<% include partials/footer %>

@@ -1,0 +1,29 @@
+<% include partials/header %>
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">
+                 <h4>Login</h4>
+                 <form action="/login" class="aa-login-form" method="post">
+                    <label>Username:</label>
+                    <input type="text" name="username">
+                    <label>Password:</label>
+                    <input type="password" name="password">
+                    <button type="submit" class="aa-browse-btn">Login</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+<% include partials/footer %>

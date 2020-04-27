@@ -1,0 +1,39 @@
+<% include partials/header %>
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">
+                 <h4>Register</h4>
+                 <form action="/register" class="aa-login-form" method="post">
+                    <label for="">Full Name<span>*</span></label>
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <label for="">Email address<span>*</span></label>
+                    <input type="text" name="email" placeholder="Email address" required>
+
+                    <label for="">Phone Number<span>*</span></label>
+                    <input type="text" name="phoneno" placeholder="Phone Number" required>
+                    <label for="">Username<span>*</span></label>
+                    <input type="text" name="username" placeholder="Username" required>
+
+                    <label for="">Password<span>*</span></label>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <label for="">Code<span>(optional)</span></label>
+                    <input type="text" name="code" placeholder="code">
+                    <button type="submit" class="aa-browse-btn">Register</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+<% include partials/footer %>

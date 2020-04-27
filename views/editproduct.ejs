@@ -1,0 +1,32 @@
+<% include partials/header %>
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">
+                 <h4>Register</h4>
+                 <form action="/product/<%=respectiveproduct._id%>/edit?_method=put" class="aa-login-form" method="post">
+                     <input type="text" name="category" placeholder="category" required value="<%=respectiveproduct.category%>">
+                    <input type="text" name="title" placeholder="Title" required value="<%=respectiveproduct.title%>">
+                    <input type="text" name="image" placeholder="Image link" required value="<%=respectiveproduct.image%>">
+                    <input type="text" name="disc" placeholder="Description" required value="<%=respectiveproduct.disc%>">
+                    <input type="text" name="price" placeholder="price" required value="<%=respectiveproduct.price%>">
+                    <input type="text" name="rating" placeholder="rating" required value="<%=respectiveproduct.rating%>">
+                    <input type="text" name="tag" placeholder="tag" required value="<%=respectiveproduct.tag%>">
+                    <button type="submit" class="aa-browse-btn">ADD</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+<% include partials/footer %>

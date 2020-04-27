@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Shop | Home</title>
+
+    <!-- Font awesome -->
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+    <link href="/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+    <!-- Product view slider -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.simpleLens.css">
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="/css/slick.css">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="/css/nouislider.css">
+    <!-- Theme color -->
+    <link id="switcher" href="/css/theme-color/default-theme.css" rel="stylesheet">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+    <!-- Top Slider CSS -->
+    <link href="/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+
+    <!-- Main style sheet -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+
+
+  </head>
+  <body>
+   <!-- wpf loader Two -->
+    <div id="wpf-loader-two">
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div>
+    <!-- / wpf loader Two -->
+  <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+
+  <!-- Start header section -->
+  <header id="aa-header">
+
+    <!-- start header bottom  -->
+    <div class="aa-header-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-header-bottom-area">
+              <!-- logo  -->
+              <div class="aa-logo">
+                <!-- Text based logo -->
+                <a href="index.html">
+                  <span class="fa fa-shopping-cart"></span>
+                  <p>Ren<strong>Clo</strong> <span>Cloth Renting App</span></p>
+                </a>
+                <!-- img based logo -->
+                <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+              </div>
+              <!-- / logo  -->
+               <!-- cart box -->
+              <div class="aa-cartbox">
+                <a class="aa-cart-link" href="/cart">
+                  <span class="fa fa-shopping-basket"></span>
+                  <span class="aa-cart-title">SHOPPING CART</span>
+                  <span class="aa-cart-notify"><i class="fa fa-heart"></i></span>
+                </a>
+              </div>
+              <!-- / cart box -->
+              <!-- search box -->
+              <div class="aa-search-box">
+                <form action="/search" method="get">
+                  <input type="text" name="search" placeholder="Search here ex. 'white dress' ">
+                  <button type="submit"><span class="fa fa-search"></span></button>
+                </form>
+              </div>
+              <!-- / search box -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / header bottom  -->
+  </header>
+  <!-- / header section -->
+  <!-- menu -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-area">
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <!-- Left nav -->
+            <ul class="nav navbar-nav">
+            <%  if(currentuser && currentuser.isadmin){%>
+              <li ><a href="#"> &nbsp&nbsp&nbspHello! Admin &nbsp&nbsp<%=currentuser.username%></a></li>
+            <%} else if(currentuser){%>
+              <li ><a href="#"> &nbsp&nbsp&nbspHello!&nbsp&nbsp<%=currentuser.username%></a></li>
+            <%}%>
+
+            <%  if(currentuser && currentuser.isadmin){%>
+              <li ><a href="/newproduct"><i class="fa fa-plus-square"> &nbsp&nbsp</i>Add Product</a></li>
+            <%}%>
+              <li><a href="/"><i class="fa fa-home"> &nbsp&nbsp&nbsp</i>Home</a></li>
+              <li><a href="/category/men"><i class="fa fa-male"> &nbsp&nbsp&nbsp</i>Men </a>
+              </li>
+              <li><a href="/category/women"><i class="fa fa-female"> &nbsp&nbsp&nbsp</i>Women</a>
+              </li>
+              <li id="kidline"><a href="/category/kid"><i class="fa fa-child"> &nbsp&nbsp&nbsp</i>Kids</a></li>
+                <li ><a href="/product"><i class="fa fa-heart"> &nbsp&nbsp&nbsp</i>Products</a></li>
+
+                <li id="accline"><a href="#" ><i class="fa fa-plus-square"> &nbsp&nbsp&nbsp</i> Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <%if(currentuser){%>
+                    <li><a href="/account/<%=currentuser._id%>"><i class="fa fa-pencil"> &nbsp&nbsp&nbsp</i>My Account</a></li>
+                    <%}%>
+                  <li><a href="" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"> &nbsp&nbsp&nbsp</i>Login</a></li>
+                    <li><a href="/register"><i class="fa fa-sign-out"> &nbsp&nbsp&nbsp</i>Sign Up</a></li>
+                      <li><a href="/logout"><i class="fa fa-play"> &nbsp&nbsp&nbsp</i>logout</a></li>
+
+
+            </ul>
+          </li>
+
+          <li><a href="/about"><i class="fa fa-paper-plane"> &nbsp&nbsp&nbsp</i>About Us</a></li>
+<li><a href="/contact"><i class="fa fa-comment"> &nbsp&nbsp&nbsp</i>Contact</a></li>
+          </div><!--/.nav-collapse -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / menu -->
+  <div class="container" id="flash">
+  <%if(error && error.length>0){%>
+    <!-- //error.length is used because req.flash sets empty array[] if empty -->
+
+    <div class="alert alert-danger" ><%= error[0]%></div>
+  <%}%>
+  <%if(success  && success.length>0){%>
+    <div class="alert alert-success" "> <%=success[0]%></div>
+  <%}%>
+  </div>
