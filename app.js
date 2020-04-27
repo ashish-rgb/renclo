@@ -30,7 +30,7 @@ paypal.configure({
 ///////////////Authentication///////////////////////////////
 app.use(expresssession({//to encode                       //
   secret:"i am the best coder",                           //
-  resave:false,                                           //
+  resave:false,                                           ///
   saveUninitialized:false                                 //
 }));                                                      //
                                                           //
