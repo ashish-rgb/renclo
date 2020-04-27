@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");//to convert string page to object from html page
 var mongoose=require("mongoose");
 // mongoose.connect("mongodb://127.0.0.1/renclo",{useNewUrlParser:true,useUnifiedTopology:true});//connect database
-mongoose.connect("mongodb+srv://nik:niknikhil@1@cluster0-5tolk.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});//connect database cloud
+mongoose.connect("mongodb+srv://nik:nik@cluster0-5tolk.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});//connect database cloud
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");//to attach .ejs to every html page
 app.use(express.static('public'));//to access images or other resources
