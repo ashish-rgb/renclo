@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");//to attach .ejs to every html page
 app.use(express.static('public'));//to access images or other resources
 var comment=require("./models/comment");
-var product=require("./models/product");
+var product=require("./models/product");//ashish
 var user=require("./models/user.js");
 var order=require("./models/order.js");
 var passport=require("passport");//for Authentication
