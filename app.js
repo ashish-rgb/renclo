@@ -382,3 +382,5 @@ app.listen(port, function(){//listens to port 3000
  //git status :to know status of git
  //git commit -m "detial":to commit that means to add checkpoint
  //git push heroku master:to transfer files from .git folder to heroku server and here master is checkpoint(latest)
+//git checkout branchname: to make sure correct local branch is Checkout
+//git push -u origin develop : tracking connection
