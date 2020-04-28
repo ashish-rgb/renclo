@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");//to convert string page to object from html page
 var mongoose=require("mongoose");
-// mongoose.connect("mongodb://127.0.0.1/renclo",{useNewUrlParser:true,useUnifiedTopology:true});//connect database
+//mongoose.connect("mongodb://127.0.0.1/renclo",{useNewUrlParser:true,useUnifiedTopology:true});//connect database
 mongoose.connect("mongodb+srv://nik:nik@cluster0-5tolk.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});//connect database cloud
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");//to attach .ejs to every html page
@@ -50,7 +50,14 @@ app.use(function (req,res ,next) {//to pass userinformation in every page
 /////////////Routes////////////////////////////////////////
 
 app.get("/", function(req, res){//landing page
-    res.render("index");
+  product.find({},function(error,retrivedproduct){
+    if (error) {
+      console.log(error);
+    }else{
+      res.render("index",{retrivedproduct:retrivedproduct});
+    }
+  })
+
 });
 
 app.get("/about", function(req, res){//about page
@@ -118,7 +125,7 @@ req.flash("success","Logged out!!")
 res.redirect("/");
 });
 
-app.post("/newproduct",function(req,res){//creating new product route
+app.post("/newproduct",isloggedin,function(req,res){//creating new product route
   var newproduct={tag:req.body.tag,title:req.body.title,rating:req.body.rating,disc:req.body.disc,price:req.body.price,image:req.body.image,category:req.body.category}
 product.create(newproduct,function(error,savedproduct){
   if (error) {
@@ -130,7 +137,7 @@ product.create(newproduct,function(error,savedproduct){
 })
 });
 
-app.get("/newproduct", function(req, res){//creatiing new product page
+app.get("/newproduct",isloggedin, function(req, res){//creatiing new product page
     res.render("newproduct");
 });
 
@@ -144,7 +151,7 @@ console.log(error);
 });
 });
 
-app.get("/product/:id/edit",function(req,res){
+app.get("/product/:id/edit",isloggedin,function(req,res){
   product.findById(req.params.id,function(error,foundproduct){
     if (error) {
       console.log("error");
@@ -156,7 +163,7 @@ app.get("/product/:id/edit",function(req,res){
 });
 
 
-app.put("/product/:id/edit",function (req,res) {
+app.put("/product/:id/edit",isloggedin,function (req,res) {
 var newproduct={tag:req.body.tag,title:req.body.title,rating:req.body.rating,disc:req.body.disc,price:req.body.price,image:req.body.image,category:req.body.category}
   product.findByIdAndUpdate(req.params.id,newproduct,function(error,updatedproduct){
 if (error) {
@@ -169,7 +176,7 @@ if (error) {
 
 });
 
-app.delete("/delete/:id",function(req,res){//deleting product
+app.delete("/delete/:id",isloggedin,function(req,res){//deleting product
   console.log(req.params.id);
   product.findByIdAndRemove(req.params.id,function(error){//for deleting
     if (error) {
@@ -213,7 +220,7 @@ app.post("/product/:id/comment",isloggedin,function (req,res) {//creating new co
   })
 });
 
-app.delete("/product/:id/comment/:commentid/delete",function(req,res){//deleting comment
+app.delete("/product/:id/comment/:commentid/delete",isloggedin,function(req,res){//deleting comment
   console.log(req.params.commentid);
   comment.findByIdAndRemove(req.params.commentid,function(error){//for deleting
     if (error) {
@@ -272,7 +279,9 @@ app.post("/order/:id/submit",function(req,res){
             firstname:req.body.firstname,
             lastname:req.body.lastname,
             price:price,
-            totalprice:p
+            totalprice:p,
+            image:product.image,
+            title:product.title
                         }
         order.create(neworder,function(error,createdorder){
           if (error) {
@@ -291,6 +300,50 @@ app.post("/order/:id/submit",function(req,res){
 })
 });
 
+app.get("/ordermanage",isloggedin,function(req,res){
+
+order.find({},function(error,order){
+  if (error) {
+    console.log(error);
+  }else{
+    res.render("ordermanage",{order:order})
+  }
+});
+});
+
+app.delete("/order/:id/delete",isloggedin,function(req,res){//deleting comment
+  console.log(req.params.id);
+  order.findByIdAndRemove(req.params.id,function(error){//for deleting
+    if (error) {
+      res.redirect("error")
+    }else{
+      res.redirect("/ordermanage")
+    }
+  })
+});
+app.get("/account/:id",isloggedin, function(req, res){//showing respective product page
+  user.findById(req.params.id,function(error,retriveduser) {
+    if (error) {
+      res.redirect("/");
+    }else {
+console.log(retriveduser);
+
+      res.render("myaccount",{retriveduser:retriveduser});
+    }
+  })
+
+});
+app.delete("/account/:id/delete",isloggedin,function(req,res){//deleting product
+
+  user.findByIdAndRemove(req.params.id,function(error){//for deleting
+    if (error) {
+      res.redirect("error")
+    }else{
+req.flash("success","Account Deleted Successfully");
+      res.redirect("/")
+    }
+  })
+});
 
 function escapeRegex(text) {//function used by regex search for searching products
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -306,12 +359,14 @@ res.redirect("/login")
   }
 
 }
-app.get("/checkout",function(req,res){
-  res.render("checkout")
-})
 app.get("/success",function(req,res){
   res.render("success")
 })
+
+
+
+
+
 app.get("*", function(req, res){//landing page
     res.render("index");
 });

@@ -9,7 +9,11 @@ var mongoose=require("mongoose");
   email:String,
   phoneno:String,
   firstname:String,
-  lastname:String
+  lastname:String,
+  price:Number,
+  totalprice:Number,
+  image:String,
+  title:String
 })
 
  var order=mongoose.model("order",orderSchema);

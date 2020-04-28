@@ -1,0 +1,60 @@
+<% include partials/header %>
+
+
+<!-- Cart view section -->
+<section id="cart-view">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="cart-view-area">
+          <div class="cart-view-table">
+
+              <div class="table-responsive">
+                 <table class="table">
+                   <thead>
+                     <tr>
+                       <th>Image</th>
+                       <th>Title</th>
+                       <th>Product ID</th>
+                       <th>Size</th>
+                       <th>Days</th>
+                       <th>Customer Name</th>
+                       <th>Email</th>
+                       <th>PhoneNO</th>
+                       <th>Address</th>
+                       <th>Price</th>
+                       <th>Total price</th>
+                       <th></th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <%for(var i=0;i<order.length;i++){%>
+                     <tr>
+
+                       <td><a href="#"><img src="<%=order[i].image%>" alt="img"></a></td>
+                       <td><a class="aa-cart-title" href="/product/<%=order[i].productid%>"></a><%=order[i].title%></td>
+                       <td><%=order[i].productid%></td>
+                       <td><%=order[i].size%></td>
+                       <td><%=order[i].day%></td>
+                        <td><%=order[i].firstname%> &nbsp<%=order[i].lastname%></td>
+                       <td><%=order[i].email%></td>
+                       <td><%=order[i].phoneno%></td>
+                       <td><%=order[i].address%></td>
+                       <td><%=order[i].price%></td>
+                       <td>Rs.<%=order[i].totalprice%></td>
+                       <td><form action="/order/<%=order[i]._id%>/delete?_method=delete" method="post">
+                         <button><fa class=" remove fa fa-close"></fa></button>
+                       </form></td>
+                     </tr>
+                     <%} %>
+                     </tbody>
+                 </table>
+               </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / Cart view section -->
+<% include partials/footer%>

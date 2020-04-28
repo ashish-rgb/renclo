@@ -1,0 +1,31 @@
+<% include partials/header %>
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">
+                 <h4>Account of Username :<%=retriveduser.username%></h4><hr>
+                    <label for="">Full Name :<span>&nbsp<%=retriveduser.username%></span></label><hr>
+                    <label for="">Email address :<span>&nbsp<%=retriveduser.email%></span></label><hr>
+                    <label for="">Phone Number :<span>&nbsp<%=retriveduser.phoneno%></span></label><hr>
+                    <hr>
+                    <%  if(currentuser){%>
+                    <form  action="/account/<%=retriveduser._id%>/delete?_method=delete" method="post">
+                      <button class="btn btn-warning">Delete Account</button>
+                    </form>
+    <%  }%>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+<% include partials/footer %>
