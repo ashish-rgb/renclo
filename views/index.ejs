@@ -153,28 +153,29 @@
                 <div class="tab-pane fade in active" id="popular">
                   <ul class="aa-product-catg aa-popular-slider">
                     <!-- start single product item -->
-                    <% for (var i = 0; i < retrivedproduct.length; i++) {%>
+                    <%for(var i = 0; i < indexproduct.length; i++){%>
+
                                   <li>
                                     <figure>
-                                      <a class="aa-product-img" href="/product/<%=retrivedproduct[i]._id%>"><img src="<%=retrivedproduct[i].image%>" alt="polo shirt img"></a>
-                                      <a class="aa-add-card-btn"href="/product/<%=retrivedproduct[i]._id%>"><span class="fa fa-shopping-cart"></span>Buy Now</a>
+                                      <a class="aa-product-img" href="/product/<%=indexproduct[i]._id%>"><img src="<%=indexproduct[i].image%>" alt="polo shirt img"></a>
+                                      <a class="aa-add-card-btn"href="/product/<%=indexproduct[i]._id%>"><span class="fa fa-shopping-cart"></span>Buy Now</a>
                                       <figcaption>
-                                        <h4 class="aa-product-title"><a href="#"><span class="btn btn-success "><%=retrivedproduct[i].rating%></span>&nbsp&nbsp<%=retrivedproduct[i].title%></a></h4>
-                                        <span class="aa-product-price"> <%=retrivedproduct[i].price%></span>
+                                        <h4 class="aa-product-title"><a href="#"><span class="btn btn-success "><%=indexproduct[i].rating%></span>&nbsp&nbsp<%=indexproduct[i].title%></a></h4>
+                                        <span class="aa-product-price">Rs. <%=indexproduct[i].price%></span>
                                       </figcaption>
                                     </figure>
                                     <!-- product badge -->
                                   <%  if(currentuser && currentuser.isadmin){%>
-                                  <form  style="display:inline;" action="/delete/<%=retrivedproduct[i]._id%>?_method=delete" method="post">
+                                  <form  style="display:inline;" action="/delete/<%=indexproduct[i]._id%>?_method=delete" method="post">
                                     <button class="btn btn-warning">Delete</button>
                                   </form>
-                                      <a class="btn btn-warning"href="/product/<%=retrivedproduct[i]._id%>/edit">Edit</a>
+                                      <a class="btn btn-warning"href="/product/<%=indexproduct[i]._id%>/edit">Edit</a>
                                   <%  }%>
-                                     <span class="aa-badge aa-hot" href="#"><%=retrivedproduct[i].tag%></span>
+                                     <span class="aa-badge aa-hot" href="#"><%=indexproduct[i].tag%></span>
                                      <hr>
                                   </li>
                                   <!-- start single product item -->
-                                    <%  }%>
+                                    <% }%>
                   </ul>
                   <a class="aa-browse-btn" href="/product">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                 </div>

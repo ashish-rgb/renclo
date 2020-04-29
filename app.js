@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");//to convert string page to object from html page
 var mongoose=require("mongoose");
-//mongoose.connect("mongodb://127.0.0.1/renclo",{useNewUrlParser:true,useUnifiedTopology:true});//connect database
+//mongoose.connect("mongodb://127.0.0.1/renclo",{useNewUrlParser:true,useUnifiedTopology:true});//connect database//
 mongoose.connect("mongodb+srv://nik:nik@cluster0-5tolk.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});//connect database cloud
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");//to attach .ejs to every html page
@@ -11,6 +11,8 @@ var comment=require("./models/comment");
 var product=require("./models/product");
 var user=require("./models/user.js");
 var order=require("./models/order.js");
+var nodemailer = require("nodemailer");
+
 var passport=require("passport");//for Authentication
 var localstratedy=require("passport-local");
 var passportlocalmongoose=require("passport-local-mongoose");
@@ -19,14 +21,8 @@ var methodoverride=require("method-override")//for using put delete as method
 app.use(methodoverride("_method"));
 var flash=require("connect-flash")
 app.use(flash());
-var paypal = require('paypal-rest-sdk');
 mongoose.set("useCreateIndex",true);
 mongoose.set("useFindAndModify",false);
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': 'AfU1P-z8Ru-BPj-d_k-5dMPF525retH4JLrYu0zHnquywzADuqJHKke8fyqBBNXb4Tami_-wfd4xysvV',
-  'client_secret': 'EASW_hjsgQuGAWr3cWvAqovgT4_3JJbAdYGEEo2eV1msB0al9oW1Q3nK_qDvVn9Z4FTn48PkiDjWFzsT'
-});
 ///////////////Authentication///////////////////////////////
 app.use(expresssession({//to encode                       //
   secret:"i am the best coder",                           //
@@ -50,13 +46,14 @@ app.use(function (req,res ,next) {//to pass userinformation in every page
 /////////////Routes////////////////////////////////////////
 
 app.get("/", function(req, res){//landing page
-  product.find({},function(error,retrivedproduct){
+  product.find({},function(error,indexproduct){
     if (error) {
       console.log(error);
     }else{
-      res.render("index",{retrivedproduct:retrivedproduct});
+
+      res.render("index",{indexproduct:indexproduct});
     }
-  })
+  });
 
 });
 
@@ -364,7 +361,36 @@ app.get("/success",function(req,res){
 })
 
 
+app.post("/mail",function(req,res){
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'customerservice8797@gmail.com',
+      pass: 'renclo8797'
+    }
+  });
 
+  var mailOptions = {
+    from: "customerservice8797@gmail.com",
+    to: 'renclotheapp@gmail.com',
+    subject:req.body.subject,
+    text: "hey",
+    html:`<h4>Customer Name:${req.body.name}</h4><h5>Customer Email: ${req.body.email}</h5><h5>subject:${req.body.subject}</h5><h5>${req.body.message}</h5>`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+      req.flash("error","Technical Issue,Please try again!")
+      res.redirect("/contact");
+    } else {
+
+      console.log('Email sent to company: ' + info.response);
+      req.flash("success","Your Message has been recieved")
+      res.redirect("/contact")
+    }
+  });
+})
 
 
 app.get("*", function(req, res){//landing page
@@ -384,3 +410,4 @@ app.listen(port, function(){//listens to port 3000
  //git push heroku master:to transfer files from .git folder to heroku server and here master is checkpoint(latest)
 //git checkout branchname: to make sure correct local branch is Checkout
 //git push -u origin develop : tracking connection
+//backtick `` use to execute Variables or any javascript inside quotes
